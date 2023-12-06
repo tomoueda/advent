@@ -232,16 +232,17 @@ Card 207: 52 14 61 69 16 53  1 34  9 77 | 21 59 75 39 60 40 38 74 95 97 46 80 19
 
 # part 2
 
-lines = actual.split('\n')
+lines = sample.split('\n')
 scores = [1] * len(lines)
 
 for i in range(len(lines)):
     line = lines[i]
     _, r = line.split(':')
-    wins, mine = list(map(lambda x: x.strip(), r.split('|')))
-    wins = set(filter(lambda x: x != '', wins.split(' ')))
-    mine = set(filter(lambda x: x != '', mine.split(' ')))
-    inter = mine.intersection(wins)
+    wins, mine = list(map(lambda x: x.split(), r.split('|')))
+    wins = set(wins)
+    mine = set(mine)
+
+    inter = mine & wins
     for j in range(i + 1, i + len(inter) + 1):
         if j < len(lines):
             scores[j] += scores[i] 
