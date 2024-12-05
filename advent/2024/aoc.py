@@ -18,4 +18,4 @@ def get_input(day):
     response = requests.get(url, cookies={"session": session_cookie})
     if response.status_code != 200:
         raise Exception(f"Failed to fetch input data: HTTP {response.status_code}")
-    return response.text
+    return response.text.rstrip()
