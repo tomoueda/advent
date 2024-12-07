@@ -107,19 +107,65 @@ def traverse(pos, grid):
         if collide == 2:
             return True
 
+def traverse2(pos, grid):
+    walls = set()
+    i = 0
+    while True:
+        next_pos = pos + d[i]
+        if grid[next_pos] is None:
+            return False
+        if grid[next_pos] == '#':
+            if next_pos in walls:
+                return True
+            walls.add(next_pos)
+            i += 1
+            i %= 4 
+            continue
+        pos = next_pos
+
 # pos, grid = get_grid()
 # grid[V(3, 6)] = '#'
 # traverse(pos, grid)
 
+def get_path(pos, grid):
+    path = set()
+    i = 0
+    while grid[pos] is not None:
+        path.add(pos)
+        next_pos = pos + d[i]
+        if grid[next_pos] == '#':
+            i += 1
+            i %= 4
+            continue
+        pos = next_pos
+    return path
+
+
+
+# naive
+#s = 0
+#for i in range(len(lines)):
+#    for j in range(len(lines[0])):
+#        pos, grid = get_grid()
+#        grid[V(j, i)] = '#'
+#        if traverse(pos, grid):
+#            s += 1
+#print(s)
+#
+
+
+#reduced search space
 s = 0
-for i in range(len(lines)):
-    for j in range(len(lines[0])):
-        pos, grid = get_grid()
-        grid[V(j, i)] = '#'
-        if traverse(pos, grid):
-            print(V(j, i))
-            s += 1
+path = get_path(pos, grid)
+for p in path:
+    pos, grid = get_grid()
+    grid[p] = '#'
+    if traverse2(pos, grid):
+        print(p)
+        s += 1
 print(s)
+
+
 
 
 #(5, 1)
