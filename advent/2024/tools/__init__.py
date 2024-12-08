@@ -13,6 +13,16 @@ class V:
             raise Exception('unequal lengths')
         return V(*[e[0] + e[1] for e in zip(self.coor, o)])
 
+    def __sub__(self, o):
+        if isinstance(o, int):
+            # makes it work for sum
+            if o == 0:
+                return self
+            raise Exception('cant add a scalar')
+        if len(self) != len(o):
+            raise Exception('unequal lengths')
+        return V(*[e[0] - e[1] for e in zip(self.coor, o)])
+
     def __radd__(self, o):
         if isinstance(o, int):
             if o == 0:
