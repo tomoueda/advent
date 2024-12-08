@@ -66,3 +66,22 @@ def test():
     assert (3, 4) * V(1, 2) == (3, 8)
     assert V(1, 2, 3) + (3, 4, 5) == (4, 6, 8)
 test()
+
+
+from collections import defaultdict
+
+def get_grid(lines):
+    grid = defaultdict(lambda: None)
+    rows = lines.splitlines()
+    for i in range(len(rows)):
+        for j in range(len(rows[0])):
+            grid[V(j, i)] = rows[i][j]
+    return grid, len(rows[0]), len(rows)
+
+def printg(grid, x, y):
+    s = ''
+    for i in range(y):
+        for j in range(x):
+            s += grid[(j, i)]
+        s += '\n'
+    print(s)
