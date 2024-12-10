@@ -60,6 +60,8 @@ class V:
     def __len__(self):
         return len(self.coor)
 
+
+fourd = [V(1, 0), V(-1, 0), V(0, 1), V(0, -1)]
 def test():
     assert V(1, 2) + (3, 4) == (4, 6)
     assert 3 * V(1, 2) == (3, 6)
